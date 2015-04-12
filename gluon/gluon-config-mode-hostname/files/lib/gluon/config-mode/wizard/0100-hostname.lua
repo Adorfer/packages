@@ -9,7 +9,7 @@ function M.section(form)
   local o = s:option(cbi.Value, "_hostname", i18n.translate("Node name"))
   local tmp = uci:get_first("system", "system", "hostname")
   #replace all underlines with spaces
-  tmp = 
+  tmp = string.gsub(tmp, "_", " ")
   o.value = tmp
   o.rmempty = false
   o.datatype = "type(hostname, ' ')"
