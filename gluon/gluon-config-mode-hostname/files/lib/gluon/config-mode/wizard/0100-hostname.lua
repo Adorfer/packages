@@ -12,7 +12,7 @@ function M.section(form)
   tmp = 
   o.value = tmp
   o.rmempty = false
-  o.datatype = "hostname"
+  o.datatype = "type(hostname, ' ')"
 end
 
 function M.handle(data)
