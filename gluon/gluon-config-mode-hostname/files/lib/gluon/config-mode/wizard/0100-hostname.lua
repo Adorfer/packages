@@ -7,13 +7,19 @@ local M = {}
 function M.section(form)
   local s = form:section(cbi.SimpleSection, nil, nil)
   local o = s:option(cbi.Value, "_hostname", i18n.translate("Node name"))
-  o.value = uci:get_first("system", "system", "hostname")
+  local tmp = uci:get_first("system", "system", "hostname")
+  #replace all underlines with spaces
+  tmp = 
+  o.value = tmp
   o.rmempty = false
   o.datatype = "hostname"
 end
 
 function M.handle(data)
-  uci:set("system", uci:get_first("system", "system"), "hostname", data._hostname)
+  local tmp = data._hostname
+  #replace all spaces with underlines
+  tmp = string.gsub(tmp, " ", "_")
+  uci:set("system", uci:get_first("system", "system"), "hostname", tmp)
   uci:save("system")
   uci:commit("system")
 end
